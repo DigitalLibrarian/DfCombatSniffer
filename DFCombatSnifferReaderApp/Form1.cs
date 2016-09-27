@@ -343,9 +343,6 @@ namespace DfCombatSnifferReaderApp
 
         private void HyperLink(int tabId, TreeView treeView, TreeNode treeNode)
         {
-            var index = reportLogListView.SelectedIndices[0];
-            var strike = ReportTextToStrike[index];
-
             TabControl.SelectTab(tabId);
 
             treeView.SelectedNode = treeNode;
