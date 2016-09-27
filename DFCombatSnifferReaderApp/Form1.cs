@@ -158,7 +158,10 @@ namespace DfCombatSnifferReaderApp
                             }
 
                             var wbpNodeName = wbp.KeyValues[SnifferTags.BodyPartNameSingular];
-                            wbpNodeName = string.Format("{0} - {1}", wbpNodeName, wbp.KeyValues[SnifferTags.LayerName]);
+                            if (wbp.KeyValues.ContainsKey(SnifferTags.LayerName))
+                            {
+                                wbpNodeName = string.Format("{0} - {1}", wbpNodeName, wbp.KeyValues[SnifferTags.LayerName]);
+                            }
                             treeNode = new TreeNode(wbpNodeName, layerNodes.ToArray());
                             wbpNodes.Add(treeNode);
                             TreeToSnif[treeNode] = wbp;
