@@ -490,7 +490,8 @@ function DumpAttacks(unit)
 			end
 			Append("FULL_CONTACT_BLUNT_MOMENTUM_RESIST: " .. math.floor(vbca+vbcb+vbcc))
 			Append("CONTACT_10_BLUNT_MOMENTUM_RESIST: " .. math.floor((vbca+vbcb+vbcc)*10/actvol))
-			Append("UNBROKEN_MOMENTUM_DEFLECTION: " .. math.floor(deduct), math.floor(deduct*10/actvol))
+			Append("UNBROKEN_MOMENTUM_DEFLECTION: " .. math.floor(deduct))
+			Append("CONTACT_10_MOMENTUM_DEFLECTION:" .. math.floor(deduct*10/actvol))
 			Append("VOLUME: " .. actvol)	
 			Append("WEIGHT:  " .. actweight/1000)
 			vshyre=matdata.yield.SHEAR
