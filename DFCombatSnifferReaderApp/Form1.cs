@@ -21,8 +21,8 @@ namespace DfCombatSnifferReaderApp
         {
             public const int ReportText = 0;
             public const int Strike = 1;
-
             public const int Units = 2;
+            public const int Targets = 3;
         }
 
         ISnifferLogParser Parser { get; set; }
@@ -58,6 +58,7 @@ namespace DfCombatSnifferReaderApp
 
         Dictionary<Unit, TreeNode> UnitNodes = new Dictionary<Unit, TreeNode>();
         Dictionary<TreeNode, Unit> UnitHyperLinks = new Dictionary<TreeNode, Unit>();
+        Dictionary<TreeNode, AttackStrike> StrikeHyperLinks = new Dictionary<TreeNode, AttackStrike>();
 
         private void LoadFile(string path)
         {
@@ -115,10 +116,13 @@ namespace DfCombatSnifferReaderApp
             UnitsTree.Nodes.Clear();
             UnitsNodeDisplayListView.Clear();
 
+            TargetsTree.Nodes.Clear();
+
             reportLogListView.Items.Clear();
 
             UnitNodes.Clear();
             UnitHyperLinks.Clear();
+            StrikeHyperLinks.Clear();
             TreeToSnif.Clear();
             TreeToStrike.Clear();
             StrikeToTree.Clear();
@@ -138,9 +142,6 @@ namespace DfCombatSnifferReaderApp
                 {
                     var attackerUnit = session.Units.First(x => x.Name.Equals(strike.AttackerName));
                     var defenderUnit = session.Units.First(x => x.Name.Equals(strike.DefenderName));
-
-
-
 
                     int woundCount = 1;
                     var woundNodes = new List<TreeNode>();
@@ -171,7 +172,6 @@ namespace DfCombatSnifferReaderApp
                         TreeToSnif[treeNode] = wound;
                     }
 
-
                     var attackerHyperNode = new TreeNode(string.Format("Attacker: {0}", attackerUnit.Name));
                     UnitHyperLinks[attackerHyperNode] = attackerUnit;
                     TreeToSnif[attackerHyperNode] = attackerUnit;
@@ -197,6 +197,22 @@ namespace DfCombatSnifferReaderApp
                     }
 
                     StrikeTree.Nodes.Add(strikeNode);
+
+                    // Update the targets tree
+                    if(strike.Target != null)
+                    {
+                        var targetNode = TargetsTree.Nodes.Find(strike.Target, false).SingleOrDefault();
+                        if (targetNode == null)
+                        {
+                            targetNode = TargetsTree.Nodes.Add(strike.Target, strike.Target);   
+                        }
+
+                        var targetStrikeNode = new TreeNode(strikeReportText);
+                        StrikeHyperLinks[targetStrikeNode] = strike;
+
+                        targetNode.Nodes.Add(targetStrikeNode);
+                    }
+
                 }
             }
 
@@ -219,7 +235,6 @@ namespace DfCombatSnifferReaderApp
                 reportLogListView.Items.Add(lvi);
                 reportTextIndex++;
             }
-
 
             foreach(var unit in session.Units.OrderBy(u => u.Id))
             {
@@ -341,12 +356,20 @@ namespace DfCombatSnifferReaderApp
             {
                 DoHyperLinkUnit(node);
             }
+        }
 
+        private void HyperLinkSelectedStrike()
+        {
+            var node = TargetsTree.SelectedNode;
+            if (StrikeHyperLinks.ContainsKey(node))
+            {
+                DoHyperLinkStrike(node);
+            }
         }
 
         private void HyperLink(int tabId, TreeView treeView, TreeNode treeNode)
         {
-            TabControl.SelectTab(tabId);
+            TargetsTabControl.SelectTab(tabId);
 
             treeView.SelectedNode = treeNode;
             treeNode.Expand();
@@ -403,6 +426,16 @@ namespace DfCombatSnifferReaderApp
             }
         }
 
+        void DoHyperLinkStrike(TreeNode node)
+        {
+            if(StrikeHyperLinks.ContainsKey(node))
+            {
+                var strike = StrikeHyperLinks[node];
+                var strikeNode = StrikeToTree[strike];
+                HyperLink(ViewerTabs.Strike, StrikeTree, strikeNode);
+            }
+        }
+
         private void StrikeTree_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -419,5 +452,19 @@ namespace DfCombatSnifferReaderApp
             }
         }
 
+        private void TargetsTree_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            var node = e.Node;
+
+            DoHyperLinkStrike(node);
+        }
+
+        private void TargetsTree_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                HyperLinkSelectedStrike();
+            }
+        }
     }
 }

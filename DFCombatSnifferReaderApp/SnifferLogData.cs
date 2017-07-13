@@ -125,6 +125,15 @@ namespace DfCombatSnifferReaderApp
 
         public string AttackerName { get { return KeyValues[SnifferTags.AttackerName]; } }
         public string DefenderName { get { return KeyValues[SnifferTags.DefenderName]; } }
+
+        public string Target
+        {
+            get
+            {
+                if (!Wounds.Any()) return null;
+                return string.Format("{0}'s {1}", DefenderName, Wounds.First().Parts.First().NameSingular);
+            }
+        }
     }
 
     public class Wound : SnifferNode
@@ -145,6 +154,14 @@ namespace DfCombatSnifferReaderApp
             : base()
         {
             Layers = new List<TissueLayer>();
+        }
+
+        public string NameSingular
+        {
+            get
+            {
+                return KeyValues[SnifferTags.BodyPartNameSingular];
+            }
         }
     }
 
