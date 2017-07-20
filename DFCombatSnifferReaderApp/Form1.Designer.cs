@@ -37,7 +37,7 @@
             this.StrikesSplitContainer = new System.Windows.Forms.SplitContainer();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.TabControl = new System.Windows.Forms.TabControl();
+            this.TargetsTabControl = new System.Windows.Forms.TabControl();
             this.ReportLogTabPage = new System.Windows.Forms.TabPage();
             this.reportLogListView = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -46,12 +46,14 @@
             this.UnitsSplitContainer = new System.Windows.Forms.SplitContainer();
             this.UnitsTree = new System.Windows.Forms.TreeView();
             this.UnitsNodeDisplayListView = new System.Windows.Forms.ListView();
+            this.TargetsTabPage = new System.Windows.Forms.TabPage();
+            this.TargetsTree = new System.Windows.Forms.TreeView();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.StrikesSplitContainer)).BeginInit();
             this.StrikesSplitContainer.Panel1.SuspendLayout();
             this.StrikesSplitContainer.Panel2.SuspendLayout();
             this.StrikesSplitContainer.SuspendLayout();
-            this.TabControl.SuspendLayout();
+            this.TargetsTabControl.SuspendLayout();
             this.ReportLogTabPage.SuspendLayout();
             this.StrikesTabPage.SuspendLayout();
             this.UnitsTabPage.SuspendLayout();
@@ -59,6 +61,7 @@
             this.UnitsSplitContainer.Panel1.SuspendLayout();
             this.UnitsSplitContainer.Panel2.SuspendLayout();
             this.UnitsSplitContainer.SuspendLayout();
+            this.TargetsTabPage.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -154,19 +157,20 @@
             this.label1.TabIndex = 8;
             this.label1.Text = "Session: ";
             // 
-            // TabControl
+            // TargetsTabControl
             // 
-            this.TabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.TargetsTabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.TabControl.Controls.Add(this.ReportLogTabPage);
-            this.TabControl.Controls.Add(this.StrikesTabPage);
-            this.TabControl.Controls.Add(this.UnitsTabPage);
-            this.TabControl.Location = new System.Drawing.Point(0, 53);
-            this.TabControl.Name = "TabControl";
-            this.TabControl.SelectedIndex = 0;
-            this.TabControl.Size = new System.Drawing.Size(1160, 556);
-            this.TabControl.TabIndex = 10;
+            this.TargetsTabControl.Controls.Add(this.ReportLogTabPage);
+            this.TargetsTabControl.Controls.Add(this.StrikesTabPage);
+            this.TargetsTabControl.Controls.Add(this.UnitsTabPage);
+            this.TargetsTabControl.Controls.Add(this.TargetsTabPage);
+            this.TargetsTabControl.Location = new System.Drawing.Point(0, 53);
+            this.TargetsTabControl.Name = "TargetsTabControl";
+            this.TargetsTabControl.SelectedIndex = 0;
+            this.TargetsTabControl.Size = new System.Drawing.Size(1160, 556);
+            this.TargetsTabControl.TabIndex = 10;
             // 
             // ReportLogTabPage
             // 
@@ -259,12 +263,32 @@
             this.UnitsNodeDisplayListView.UseCompatibleStateImageBehavior = false;
             this.UnitsNodeDisplayListView.View = System.Windows.Forms.View.List;
             // 
+            // TargetsTabPage
+            // 
+            this.TargetsTabPage.Controls.Add(this.TargetsTree);
+            this.TargetsTabPage.Location = new System.Drawing.Point(4, 22);
+            this.TargetsTabPage.Name = "TargetsTabPage";
+            this.TargetsTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.TargetsTabPage.Size = new System.Drawing.Size(1152, 530);
+            this.TargetsTabPage.TabIndex = 3;
+            this.TargetsTabPage.Text = "Targets";
+            this.TargetsTabPage.UseVisualStyleBackColor = true;
+            // 
+            // TargetsTree
+            // 
+            this.TargetsTree.Location = new System.Drawing.Point(0, 0);
+            this.TargetsTree.Name = "TargetsTree";
+            this.TargetsTree.Size = new System.Drawing.Size(1156, 530);
+            this.TargetsTree.TabIndex = 0;
+            this.TargetsTree.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TargetsTree_NodeMouseDoubleClick);
+            this.TargetsTree.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TargetsTree_KeyUp);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1160, 609);
-            this.Controls.Add(this.TabControl);
+            this.Controls.Add(this.TargetsTabControl);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.menuStrip1);
@@ -279,7 +303,7 @@
             this.StrikesSplitContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.StrikesSplitContainer)).EndInit();
             this.StrikesSplitContainer.ResumeLayout(false);
-            this.TabControl.ResumeLayout(false);
+            this.TargetsTabControl.ResumeLayout(false);
             this.ReportLogTabPage.ResumeLayout(false);
             this.StrikesTabPage.ResumeLayout(false);
             this.UnitsTabPage.ResumeLayout(false);
@@ -287,6 +311,7 @@
             this.UnitsSplitContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.UnitsSplitContainer)).EndInit();
             this.UnitsSplitContainer.ResumeLayout(false);
+            this.TargetsTabPage.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -303,7 +328,7 @@
         private System.Windows.Forms.SplitContainer StrikesSplitContainer;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TabControl TabControl;
+        private System.Windows.Forms.TabControl TargetsTabControl;
         private System.Windows.Forms.TabPage ReportLogTabPage;
         private System.Windows.Forms.TabPage StrikesTabPage;
         private System.Windows.Forms.ListView reportLogListView;
@@ -312,6 +337,8 @@
         private System.Windows.Forms.SplitContainer UnitsSplitContainer;
         private System.Windows.Forms.TreeView UnitsTree;
         private System.Windows.Forms.ListView UnitsNodeDisplayListView;
+        private System.Windows.Forms.TabPage TargetsTabPage;
+        private System.Windows.Forms.TreeView TargetsTree;
     }
 }
 
