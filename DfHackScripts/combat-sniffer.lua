@@ -130,6 +130,7 @@ function DumpBody(unit)
 	local body_plan = unit.body.body_plan
 	local size_info = unit.body.size_info
 	local phys = unit.body.physical_attrs
+	local ment = unit.status.current_soul.mental_attrs
 
 	Append("BODY_START")
 	Append("SIZE_CURRENT: " .. size_info.size_cur)
@@ -145,6 +146,21 @@ function DumpBody(unit)
 	Append("PHYSICAL_ENDURANCE: " .. phys.ENDURANCE.value)
 	Append("PHYSICAL_RECUPERATION: " .. phys.RECUPERATION.value)
 	Append("PHYSICAL_DISEASE_RESISTANCE: " .. phys.DISEASE_RESISTANCE.value)
+
+	Append("MENTAL_ANALYTICAL_ABILITY: " .. ment.ANALYTICAL_ABILITY.value)
+	Append("MENTAL_FOCUS: " .. ment.FOCUS.value)
+	Append("MENTAL_WILLPOWER: " .. ment.WILLPOWER.value)
+	Append("MENTAL_CREATIVITY: " .. ment.CREATIVITY.value)
+	Append("MENTAL_INTUITION: " .. ment.INTUITION.value)
+	Append("MENTAL_PATIENCE: " .. ment.PATIENCE.value)
+	Append("MENTAL_MEMORY: " .. ment.MEMORY.value)
+	Append("MENTAL_LIGUISTIC_ABILITY: " .. ment.LINGUISTIC_ABILITY.value)
+	Append("MENTAL_SPATIAL_SENSE: " .. ment.SPATIAL_SENSE.value)
+	Append("MENTAL_MUSICALITY: " .. ment.MUSICALITY.value)
+	Append("MENTAL_KINESTHETIC_SENSE: " .. ment.KINESTHETIC_SENSE.value)
+	Append("MENTAL_EMPATHY: " .. ment.EMPATHY.value)
+	Append("MENTAL_SOCIAL_AWARENESS: " .. ment.SOCIAL_AWARENESS.value)
+
 	Append("BLOOD_MAX: " .. unit.body.blood_max)
 	Append("BLOOD_COUNT: " .. unit.body.blood_count)
 
