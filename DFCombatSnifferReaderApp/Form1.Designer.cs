@@ -48,6 +48,9 @@
             this.UnitsNodeDisplayListView = new System.Windows.Forms.ListView();
             this.TargetsTabPage = new System.Windows.Forms.TabPage();
             this.TargetsTree = new System.Windows.Forms.TreeView();
+            this.searchBox = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.searchButton = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.StrikesSplitContainer)).BeginInit();
             this.StrikesSplitContainer.Panel1.SuspendLayout();
@@ -283,11 +286,40 @@
             this.TargetsTree.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TargetsTree_NodeMouseDoubleClick);
             this.TargetsTree.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TargetsTree_KeyUp);
             // 
+            // searchBox
+            // 
+            this.searchBox.Location = new System.Drawing.Point(473, 24);
+            this.searchBox.Name = "searchBox";
+            this.searchBox.Size = new System.Drawing.Size(248, 20);
+            this.searchBox.TabIndex = 11;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(423, 27);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(44, 13);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "Search:";
+            // 
+            // searchButton
+            // 
+            this.searchButton.Location = new System.Drawing.Point(727, 24);
+            this.searchButton.Name = "searchButton";
+            this.searchButton.Size = new System.Drawing.Size(31, 23);
+            this.searchButton.TabIndex = 13;
+            this.searchButton.Text = "Go";
+            this.searchButton.UseVisualStyleBackColor = true;
+            this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1160, 609);
+            this.Controls.Add(this.searchButton);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.searchBox);
             this.Controls.Add(this.TargetsTabControl);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBox1);
@@ -339,6 +371,9 @@
         private System.Windows.Forms.ListView UnitsNodeDisplayListView;
         private System.Windows.Forms.TabPage TargetsTabPage;
         private System.Windows.Forms.TreeView TargetsTree;
+        private System.Windows.Forms.TextBox searchBox;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button searchButton;
     }
 }
 

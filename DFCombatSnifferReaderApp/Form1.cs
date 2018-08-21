@@ -220,6 +220,7 @@ namespace DfCombatSnifferReaderApp
             }
 
             int reportTextIndex = 0;
+            session.ReportTexts.RemoveAll(t => !Regex.IsMatch(t, filterRegex));
             foreach (var reportText in session.ReportTexts)
             {
                 var lvi = new ListViewItem(reportText);
@@ -468,6 +469,12 @@ namespace DfCombatSnifferReaderApp
             {
                 HyperLinkSelectedStrike();
             }
+        }
+
+        private void searchButton_Click(object sender, EventArgs e)
+        {
+            var search = searchBox.Text.Trim();
+            ReloadSession(string.IsNullOrWhiteSpace(search) ? "." : search);
         }
     }
 }
