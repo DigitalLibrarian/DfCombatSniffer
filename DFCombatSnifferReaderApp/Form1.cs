@@ -65,6 +65,9 @@ namespace DfCombatSnifferReaderApp
             FileData = ReadLines(path).ToList();
             LoadFileData();
             LoadedFile = path;
+
+            var uri = new Uri(path);
+            Text = string.Format("Df Combat Sniffer Log Viewer [{0}]", uri.Segments.Last());
         }
 
         class SessionComboItem
