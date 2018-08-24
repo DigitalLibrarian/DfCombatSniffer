@@ -32,7 +32,7 @@ namespace DfCombatSnifferReaderApp
             InitializeComponent();
             
             Parser = new SnifferLogParser();
-            //LoadFile(CheatPath);
+            FileData = Enumerable.Empty<string>();
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -62,6 +62,8 @@ namespace DfCombatSnifferReaderApp
 
         private void LoadFile(string path)
         {
+            searchBox.Text = "";
+
             FileData = ReadLines(path).ToList();
             LoadFileData();
             LoadedFile = path;
@@ -79,15 +81,14 @@ namespace DfCombatSnifferReaderApp
 
         ISnifferLogData Data { get; set; }
         SnifferSession CurrentSession { get; set; }
-        private void LoadFileData()
+        private void LoadFileData(string filterRegex = ".")
         {
-            var data = Parser.Parse(FileData);
-            Data = data;
+            Data = Parser.Parse(FileData);
 
             int sessionCount = 0;
             comboBox1.DisplayMember = "Display";
             comboBox1.ValueMember = "Value";
-            comboBox1.DataSource = data.Sessions
+            comboBox1.DataSource = Data.Sessions
                 .OrderBy(s => s.Id)
                 .Select(s =>
                 {
@@ -101,14 +102,14 @@ namespace DfCombatSnifferReaderApp
                     return o;
                 }).ToList();
 
-            CurrentSession = Data.Sessions.First();
+            CurrentSession = Data.Sessions.FirstOrDefault();
 
-            ReloadSession();
+            ReloadSession(filterRegex);
         }
 
         private void ReloadSession(string filterRegex = ".")
         {
-            LoadSession(CurrentSession, filterRegex);
+            if(CurrentSession != null) LoadSession(CurrentSession, filterRegex);
         }
 
         private void LoadSession(SnifferSession session, string filterRegex)
@@ -220,8 +221,7 @@ namespace DfCombatSnifferReaderApp
             }
 
             int reportTextIndex = 0;
-            session.ReportTexts.RemoveAll(t => !Regex.IsMatch(t, filterRegex));
-            foreach (var reportText in session.ReportTexts)
+            foreach (var reportText in session.ReportTexts.Where(l => Regex.IsMatch(l, filterRegex)))
             {
                 var lvi = new ListViewItem(reportText);
                 if (session.Strikes.Any(strike => strike.ReportTextIndex == reportTextIndex))
