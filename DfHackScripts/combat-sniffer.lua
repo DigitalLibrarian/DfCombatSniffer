@@ -247,6 +247,7 @@ function DumpDefenderWound(unit, wound)
 	Append("ATTACKER_UNIT_ID: " .. wound.attacker_unit_id)
 	Append("ATTACKER_HIST_FIGURE_ID: " .. wound.attacker_hist_figure_id)
 	Append("SYNDROME_ID: " .. wound.syndrome_id)
+	Append("AGE: " .. wound.age)
 	Append("PAIN: " .. wound.pain)
 	Append("FEVER: " .. wound.fever)
 
@@ -746,6 +747,7 @@ if(args.start) then
 else
 	print (usage)
 end
+
 
 
 
